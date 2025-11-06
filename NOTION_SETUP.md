@@ -78,12 +78,63 @@ Dans `Stack`, créer :
 3. Cliquer sur "Add connections"
 4. Sélectionner votre intégration "DimDev Portfolio"
 
-### 8. Récupérer l'ID de la database
+### 8. Récupérer l'ID de la database (DATABASE_ID)
 
-1. Ouvrir la database en pleine page
-2. Copier l'URL : `https://notion.so/xxxxx?v=yyyyy`
-3. L'ID est la partie `xxxxx` (32 caractères)
-4. Ajouter dans `.env.local` : `NOTION_DATABASE_ID=xxxxx`
+**C'est l'étape que vous cherchez !** 🎯
+
+#### Méthode détaillée :
+
+1. **Ouvrir la database en plein écran**
+   - Dans Notion, ouvrir votre database "Projects"
+   - Cliquer sur les **6 points** ⋮⋮ en haut à gauche
+   - Cliquer sur **"Open as page"** (ou **"Ouvrir en tant que page"**)
+   - La database s'ouvre en pleine page dans votre navigateur
+
+2. **Regarder l'URL dans la barre d'adresse**
+
+   L'URL ressemble à ceci :
+   ```
+   https://www.notion.so/workspace-name/123456789abcdef123456789abcdef12?v=987654321
+   ```
+
+3. **Identifier le DATABASE_ID**
+
+   Le DATABASE_ID est la **longue chaîne de 32 caractères** entre le dernier `/` et le `?`
+
+   **Exemple visuel** :
+   ```
+   https://www.notion.so/mon-workspace/123456789abcdef123456789abcdef12?v=987654321
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                           👆 VOTRE DATABASE_ID 👆
+   ```
+
+4. **Copier le DATABASE_ID**
+
+   Sélectionner et copier uniquement cette partie :
+   - **Avec tirets** : `12345678-9abc-def1-2345-6789abcdef12`
+   - **Sans tirets** : `123456789abcdef123456789abcdef12`
+
+   ✅ Les deux formats fonctionnent !
+
+5. **Ajouter dans `.env.local`**
+   ```env
+   NOTION_DATABASE_ID=123456789abcdef123456789abcdef12
+   ```
+
+#### Exemple complet :
+
+Si votre URL est :
+```
+https://www.notion.so/dimdev/8f5a2b1c3d4e5f6a7b8c9d0e1f2a3b4c?v=1234567890
+```
+
+Votre DATABASE_ID est : `8f5a2b1c3d4e5f6a7b8c9d0e1f2a3b4c`
+
+#### ⚠️ Note importante :
+
+- Le DATABASE_ID est **différent** de votre API Key (qui commence par `secret_`)
+- Le DATABASE_ID fait **32 caractères** (avec ou sans tirets)
+- Si vous ne voyez pas l'URL complète, **ouvrez la database en pleine page** d'abord
 
 ### 9. Créer un premier projet test
 
