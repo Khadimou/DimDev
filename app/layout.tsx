@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   description: "Je transforme vos idées en prototypes fonctionnels — en quelques jours. POC Express, MVP rapide ou développement complet.",
   keywords: ["POC", "MVP", "Next.js", "Python", "Django", "FastAPI", "développement web", "freelance"],
   authors: [{ name: "Rassoul Dim" }],
+  icons: {
+    icon: "/DimDevLogo.png",
+    shortcut: "/DimDevLogo.png",
+    apple: "/DimDevLogo.png",
+  },
   openGraph: {
     title: "DimDev - Portfolio & Services POC",
     description: "Je transforme vos idées en prototypes fonctionnels — en quelques jours.",
