@@ -11,6 +11,8 @@ export interface Project {
   url?: string;
   github?: string;
   featured?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Service {
@@ -34,6 +36,8 @@ export interface ContactForm {
 
 export interface NotionProject {
   id: string;
+  created_time: string;
+  last_edited_time: string;
   properties: {
     Name: { title: Array<{ plain_text: string }> };
     Description: { rich_text: Array<{ plain_text: string }> };

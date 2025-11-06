@@ -35,12 +35,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic project pages
   const projects = await getProjects();
-  const projectPages = projects.map((project) => ({
-    url: `${baseUrl}/works/${project.slug}`,
-    lastModified: new Date(project.createdAt),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  const projectPages = projects.map((project) => {
+    const lastModifiedSource = project.updatedAt ?? project.createdAt ?? new Date().toISOString();
+
+    return {
+      url: `${baseUrl}/works/${project.slug}`,
+      lastModified: new Date(lastModifiedSource),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    };
+  });
 
   return [...staticPages, ...projectPages];
 }

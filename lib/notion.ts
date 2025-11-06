@@ -41,6 +41,8 @@ export async function getProjects(): Promise<Project[]> {
         results: props.Results?.rich_text?.map((r: any) => r.plain_text) || [],
         url: props.LiveURL?.url || "",
         github: props.GithubURL?.url || "",
+        createdAt: page.created_time,
+        updatedAt: page.last_edited_time,
       };
     });
   } catch (error) {
@@ -89,6 +91,8 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       results: props.Results?.rich_text?.map((r: any) => r.plain_text) || [],
       url: props.LiveURL?.url || "",
       github: props.GithubURL?.url || "",
+    createdAt: page.created_time,
+    updatedAt: page.last_edited_time,
     };
   } catch (error) {
     console.error("Error fetching project from Notion:", error);
