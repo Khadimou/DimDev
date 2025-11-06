@@ -139,14 +139,15 @@ Vercel déploiera automatiquement ! 🎉
 
 ## 📧 Setup Email (Optionnel)
 
-### Resend (Gratuit pour 3000 emails/mois)
+### Brevo (Gratuit pour 300 emails/jour)
 
-1. Créer un compte : https://resend.com
-2. Vérifier votre domaine ou utiliser un domaine test
-3. Créer une clé API
-4. Ajouter dans Vercel :
+1. Créer un compte : https://brevo.com (anciennement Sendinblue)
+2. Vérifier votre domaine ou utiliser l'email par défaut
+3. Aller dans "SMTP & API" > "API Keys"
+4. Créer une nouvelle clé API
+5. Ajouter dans Vercel :
    ```
-   RESEND_API_KEY=re_xxxxx
+   BREVO_API_KEY=your_brevo_api_key
    EMAIL_FROM=contact@votre-domaine.com
    ```
 

@@ -14,7 +14,7 @@
 ### Backend & Services
 - **Notion API** pour le CMS des projets
 - **Stripe** pour les paiements
-- **Resend** pour l'envoi d'emails
+- **Brevo** pour l'envoi d'emails
 - **Google Analytics** (react-ga4)
 - **Calendly** pour les réservations
 
@@ -59,9 +59,9 @@ STRIPE_SECRET_KEY=sk_test_xxxxx
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxxxx
 ```
 
-#### Email (Resend)
+#### Email (Brevo)
 ```env
-RESEND_API_KEY=re_xxxxx
+BREVO_API_KEY=your_brevo_api_key
 EMAIL_FROM=contact@dimdev.com
 ```
 
@@ -108,7 +108,7 @@ Ouvrir [http://localhost:3000](http://localhost:3000)
      - `NOTION_API_KEY`
      - `NOTION_DATABASE_ID`
      - `NEXT_PUBLIC_GA_ID`
-     - `RESEND_API_KEY`
+     - `BREVO_API_KEY`
      - `EMAIL_FROM`
      - `STRIPE_SECRET_KEY` (si utilisé)
      - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (si utilisé)
@@ -218,14 +218,15 @@ colors: {
 - Soumission formulaire contact
 - Clics sur projets
 
-## 📧 Configuration Email (Resend)
+## 📧 Configuration Email (Brevo)
 
-1. Créer un compte sur [resend.com](https://resend.com)
-2. Vérifier votre domaine
-3. Créer une clé API
-4. Ajouter à `.env.local` :
+1. Créer un compte sur [brevo.com](https://brevo.com) (anciennement Sendinblue)
+2. Vérifier votre domaine ou utiliser l'email par défaut
+3. Aller dans "SMTP & API" > "API Keys"
+4. Créer une nouvelle clé API
+5. Ajouter à `.env.local` :
    ```env
-   RESEND_API_KEY=re_xxxxx
+   BREVO_API_KEY=your_brevo_api_key
    EMAIL_FROM=contact@votre-domaine.com
    ```
 
