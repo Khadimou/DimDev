@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,15 +27,39 @@ export async function POST(request: NextRequest) {
       <p>${message}</p>
     `;
 
-    // Send email via Resend
-    if (process.env.RESEND_API_KEY && process.env.EMAIL_FROM) {
-      await resend.emails.send({
-        from: process.env.EMAIL_FROM,
-        to: process.env.EMAIL_FROM, // Send to yourself
-        replyTo: email,
-        subject: `Nouveau contact: ${name} - ${projectType}`,
-        html: emailHtml,
+    // Send email via Brevo
+    if (process.env.BREVO_API_KEY && process.env.EMAIL_FROM) {
+      const response = await fetch(BREVO_API_URL, {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "api-key": process.env.BREVO_API_KEY,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          sender: {
+            email: process.env.EMAIL_FROM,
+            name: "DimDev Portfolio"
+          },
+          to: [
+            {
+              email: process.env.EMAIL_FROM,
+              name: "DimDev"
+            }
+          ],
+          replyTo: {
+            email: email,
+            name: name
+          },
+          subject: `Nouveau contact: ${name} - ${projectType}`,
+          htmlContent: emailHtml,
+        }),
       });
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Brevo API error: ${error}`);
+      }
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
