@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Mail, MessageSquare, Clock } from "lucide-react";
@@ -16,6 +16,27 @@ export default function ContactPage() {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
+
+  useEffect(() => {
+    if (!calendlyUrl || calendlyUrl.includes("your-username")) {
+      return;
+    }
+
+    const existingScript = document.querySelector<HTMLScriptElement>('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+    if (existingScript) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [calendlyUrl]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,17 +130,27 @@ export default function ContactPage() {
             </Card>
 
             {/* Calendly placeholder */}
-            <div className="bg-accent/10 border-2 border-dashed border-accent rounded-xl p-6 text-center">
-              <p className="text-sm text-gray-700 mb-3">
-                Préférez réserver directement ?
-              </p>
-              <p className="text-xs text-gray-600 mb-4">
-                Le widget Calendly sera intégré ici une fois votre compte configuré.
-              </p>
-              <Button variant="accent" size="sm" disabled>
-                Calendly (à venir)
-              </Button>
-            </div>
+            {calendlyUrl && !calendlyUrl.includes("your-username") ? (
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                <div
+                  className="calendly-inline-widget w-full"
+                  data-url={calendlyUrl}
+                  style={{ minWidth: "320px", height: "640px" }}
+                />
+              </div>
+            ) : (
+              <div className="bg-accent/10 border-2 border-dashed border-accent rounded-xl p-6 text-center">
+                <p className="text-sm text-gray-700 mb-3">
+                  Préférez réserver directement ?
+                </p>
+                <p className="text-xs text-gray-600 mb-4">
+                  Le widget Calendly sera intégré ici une fois votre compte configuré.
+                </p>
+                <Button variant="accent" size="sm" disabled>
+                  Calendly (à venir)
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Right: Form */}
