@@ -19,6 +19,7 @@ export const SERVICES = [
     title: "POC Express",
     description: "Prototype fonctionnel pour valider l'idée et convaincre des partenaires.",
     price: "À partir de 400 €",
+    priceAmount: 400,
     duration: "3-5 jours",
     features: [
       "Prototype interactif (web)",
@@ -28,12 +29,15 @@ export const SERVICES = [
       "2 révisions incluses",
     ],
     popular: false,
+    stripePriceId: process.env.STRIPE_PRICE_POC || "",
+    paymentEnabled: true,
   },
   {
     id: "starter-mvp",
     title: "Starter MVP",
     description: "Produit utilisable par des premiers utilisateurs.",
     price: "À partir de 1 200 €",
+    priceAmount: 1200,
     duration: "2-4 semaines",
     features: [
       "Authentification complète",
@@ -44,12 +48,15 @@ export const SERVICES = [
       "Documentation + support 30j",
     ],
     popular: true,
+    stripePriceId: process.env.STRIPE_PRICE_MVP || "",
+    paymentEnabled: true,
   },
   {
     id: "full-dev",
     title: "Growth / Full Dev",
     description: "Produit scalé, support et maintenance.",
     price: "Sur devis",
+    priceAmount: null,
     duration: "Variable",
     features: [
       "Architecture scalable",
@@ -60,6 +67,8 @@ export const SERVICES = [
       "Roadmap et maintenance",
     ],
     popular: false,
+    stripePriceId: null,
+    paymentEnabled: false,
   },
 ];
 
