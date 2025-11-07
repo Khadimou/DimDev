@@ -1,6 +1,7 @@
 import { Check, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { CheckoutButton } from "@/components/ui/CheckoutButton";
+import { Button } from "@/components/ui/Button";
 import { SERVICES, ADD_ONS } from "@/lib/constants";
 import Link from "next/link";
 

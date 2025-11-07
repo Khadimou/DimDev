@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { XCircle, ArrowLeft, MessageCircle, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -7,6 +8,14 @@ import Link from "next/link";
 import { SERVICES } from "@/lib/constants";
 
 export default function CheckoutCancelPage() {
+  return (
+    <Suspense fallback={<CancelFallback />}>
+      <CheckoutCancelContent />
+    </Suspense>
+  );
+}
+
+function CheckoutCancelContent() {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get("service");
 
@@ -128,6 +137,14 @@ export default function CheckoutCancelPage() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function CancelFallback() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-10 w-10 border-4 border-primary border-t-transparent"></div>
     </div>
   );
 }
