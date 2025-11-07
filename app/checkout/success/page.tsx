@@ -110,7 +110,6 @@ function CheckoutSuccessContent() {
 
             {/* Secondary CTA: Email */}
             <a href={`mailto:${emailFrom}`}>
-            <a href={`mailto:${emailFrom}`}>
               <Button variant="outline" size="lg" className="w-full sm:w-auto">
                 <Mail className="mr-2" size={18} />
                 M'envoyer un email
