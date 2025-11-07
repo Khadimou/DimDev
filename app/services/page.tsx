@@ -1,7 +1,8 @@
 import { Check, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { CheckoutButton } from "@/components/ui/CheckoutButton";
 import { SERVICES, ADD_ONS } from "@/lib/constants";
+import Link from "next/link";
 
 export const metadata = {
   title: "Services & Tarifs - DimDev",
@@ -58,14 +59,27 @@ export default function ServicesPage() {
                   ))}
                 </ul>
 
-                <a href={`/contact?service=${service.id}`}>
-                  <Button
+                {service.paymentEnabled ? (
+                  <CheckoutButton
+                    serviceId={service.id}
+                    serviceName={service.title}
                     variant={service.popular ? "accent" : "primary"}
-                    className="w-full"
                   >
-                    Réserver
-                  </Button>
-                </a>
+                    Commander - {service.price}
+                  </CheckoutButton>
+                ) : (
+                  <Link href={`/contact?service=${service.id}`}>
+                    <button
+                      className={`w-full px-6 py-3 rounded-lg font-medium transition-colors ${
+                        service.popular
+                          ? "bg-accent text-white hover:bg-accent/90"
+                          : "bg-primary text-white hover:bg-primary/90"
+                      }`}
+                    >
+                      Demander un devis
+                    </button>
+                  </Link>
+                )}
               </div>
             </Card>
           ))}
