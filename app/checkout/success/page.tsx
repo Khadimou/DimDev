@@ -18,6 +18,7 @@ function CheckoutSuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [isLoading, setIsLoading] = useState(true);
+  const emailFrom = process.env.NEXT_PUBLIC_EMAIL_FROM || "contact@dimdev.pro";
 
   useEffect(() => {
     // Simulate loading time for visual effect
@@ -108,7 +109,8 @@ function CheckoutSuccessContent() {
             </a>
 
             {/* Secondary CTA: Email */}
-            <a href={`mailto:${process.env.EMAIL_FROM || "contact@dimdev.com"}`}>
+            <a href={`mailto:${emailFrom}`}>
+            <a href={`mailto:${emailFrom}`}>
               <Button variant="outline" size="lg" className="w-full sm:w-auto">
                 <Mail className="mr-2" size={18} />
                 M'envoyer un email

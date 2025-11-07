@@ -62,15 +62,7 @@ export function Footer() {
               >
                 <Github size={24} />
               </a>
-              <a
-                href={SITE_CONFIG.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-accent transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram size={24} />
-              </a>
+              
             </div>
           </div>
         </div>
@@ -81,7 +73,7 @@ export function Footer() {
             © {currentYear} {SITE_CONFIG.name}. Tous droits réservés.
           </p>
           <p className="text-gray-400 text-sm mt-2 md:mt-0">
-            Fait avec ❤️ et Next.js
+            Fait avec ❤️ par DimDev
           </p>
         </div>
       </div>

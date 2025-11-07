@@ -18,6 +18,7 @@ export default function CheckoutCancelPage() {
 function CheckoutCancelContent() {
   const searchParams = useSearchParams();
   const serviceId = searchParams.get("service");
+  const emailFrom = process.env.NEXT_PUBLIC_EMAIL_FROM || "contact@dimdev.pro";
 
   // Find the service if service ID is provided
   const service = serviceId ? SERVICES.find((s) => s.id === serviceId) : null;
@@ -128,10 +129,10 @@ function CheckoutCancelContent() {
                 Je suis disponible pour répondre à toutes vos questions par email ou lors d'un appel.
               </p>
               <a
-                href={`mailto:${process.env.EMAIL_FROM || "contact@dimdev.com"}`}
+                href={`mailto:${emailFrom}`}
                 className="text-sm text-primary hover:text-primary-dark font-medium"
               >
-                {process.env.EMAIL_FROM || "contact@dimdev.com"}
+                {emailFrom}
               </a>
             </div>
           </div>
