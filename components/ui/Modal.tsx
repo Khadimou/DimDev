@@ -1,7 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,15 +12,41 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, title, children, maxWidth = "2xl" }: ModalProps) {
+  const [isAnimating, setIsAnimating] = useState(false);
+
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      // Save current scroll position
+      const scrollY = window.scrollY;
+
+      // Add class to prevent scroll
+      document.body.classList.add('modal-open');
+
+      // Restore scroll position visually (since body is now fixed)
+      document.body.style.top = `-${scrollY}px`;
+
+      // Trigger animation
+      requestAnimationFrame(() => {
+        setIsAnimating(true);
+      });
     } else {
-      document.body.style.overflow = "unset";
+      // Get scroll position before removing fixed
+      const scrollY = document.body.style.top;
+
+      // Remove class to restore scroll
+      document.body.classList.remove('modal-open');
+      document.body.style.top = '';
+
+      // Restore scroll position
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+
+      setIsAnimating(false);
     }
 
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.classList.remove('modal-open');
+      document.body.style.top = '';
+      setIsAnimating(false);
     };
   }, [isOpen]);
 
@@ -38,14 +64,18 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = "2xl" }: Mo
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        className={`fixed inset-0 bg-black transition-opacity duration-200 ${
+          isAnimating ? 'bg-opacity-50' : 'bg-opacity-0'
+        }`}
         onClick={onClose}
       />
 
       {/* Modal */}
       <div className="flex min-h-full items-center justify-center p-4">
         <div
-          className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white rounded-2xl shadow-2xl transform transition-all`}
+          className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white rounded-2xl shadow-2xl transition-all duration-200 ${
+            isAnimating ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}

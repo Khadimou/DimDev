@@ -8,7 +8,7 @@ import { logEvent } from "@/lib/analytics";
 export function Hero() {
   const handlePOCClick = () => {
     logEvent("CTA", "Click", "Commander un POC - Hero");
-    window.location.href = "/contact";
+    window.location.href = "/services";
   };
 
   const handleWorksClick = () => {

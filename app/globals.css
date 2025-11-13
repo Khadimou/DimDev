@@ -28,3 +28,12 @@
     text-wrap: balance;
   }
 }
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+}

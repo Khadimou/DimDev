@@ -3,12 +3,16 @@
 import React from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { CheckoutButton } from "@/components/ui/CheckoutButton";
 import { Check, Sparkles } from "lucide-react";
 import { SERVICES } from "@/lib/constants";
 import { logEvent } from "@/lib/analytics";
 
 export function Services() {
+  const handleServiceClick = (serviceId: string) => {
+    logEvent("CTA", "Click", `Service - ${serviceId}`);
+    window.location.href = "/services";
+  };
+
   const handleContactClick = (serviceId: string) => {
     logEvent("CTA", "Click", `Contact - ${serviceId}`);
     window.location.href = `/contact?service=${serviceId}`;
@@ -67,13 +71,15 @@ export function Services() {
                   ))}
                 </ul>
 
-                {/* CTA - Payment enabled or Contact */}
+                {/* CTA - Redirect to Services page */}
                 {service.paymentEnabled ? (
-                  <CheckoutButton
-                    serviceId={service.id}
-                    serviceName={service.title}
+                  <Button
                     variant={service.popular ? "accent" : "primary"}
-                  />
+                    className="w-full"
+                    onClick={() => handleServiceClick(service.id)}
+                  >
+                    Découvrir
+                  </Button>
                 ) : (
                   <Button
                     variant={service.popular ? "accent" : "primary"}

@@ -44,13 +44,13 @@ export function CTA() {
               Réserver un appel
               <ArrowRight className="ml-2" size={20} />
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="lg"
               className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
               onClick={() => {
                 logEvent("CTA", "Click", "Demander un POC - Bottom CTA");
-                window.location.href = "/contact?type=poc";
+                window.location.href = "/services";
               }}
             >
               Demander un POC
