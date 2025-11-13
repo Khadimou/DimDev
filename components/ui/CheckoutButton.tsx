@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "./Button";
-import { Loader2, ShoppingCart } from "lucide-react";
+import { MessageSquare } from "lucide-react";
+import { Modal } from "./Modal";
+import { ServiceRequestForm } from "./ServiceRequestForm";
 
 interface CheckoutButtonProps {
   serviceId: string;
@@ -19,74 +21,53 @@ export function CheckoutButton({
   className = "",
   children,
 }: CheckoutButtonProps) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCheckout = async () => {
-    setIsLoading(true);
-    setError(null);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
-    try {
-      // Call the checkout API
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          serviceId,
-        }),
-      });
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Erreur lors de la création de la session");
-      }
-
-      // Redirect to Stripe Checkout
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("URL de paiement non reçue");
-      }
-    } catch (err) {
-      console.error("Checkout error:", err);
-      setError(err instanceof Error ? err.message : "Une erreur est survenue");
-      setIsLoading(false);
-    }
+  const handleSuccess = () => {
+    // Keep modal open to show success message
+    // It will auto-close after 2 seconds (handled in ServiceRequestForm)
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 3000);
   };
 
   return (
-    <div className="w-full">
-      <Button
-        variant={variant}
-        className={`w-full ${className}`}
-        onClick={handleCheckout}
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Chargement...
-          </>
-        ) : (
-          <>
-            {children || (
-              <>
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                Commander maintenant
-              </>
-            )}
-          </>
-        )}
-      </Button>
+    <>
+      <div className="w-full">
+        <Button
+          variant={variant}
+          className={`w-full ${className}`}
+          onClick={handleOpenModal}
+        >
+          {children || (
+            <>
+              <MessageSquare className="mr-2 h-4 w-4" />
+              Demander un devis
+            </>
+          )}
+        </Button>
+      </div>
 
-      {error && (
-        <p className="mt-2 text-sm text-red-600 text-center">
-          {error}
-        </p>
-      )}
-    </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title={`Demande de ${serviceName}`}
+      >
+        <ServiceRequestForm
+          serviceId={serviceId}
+          serviceName={serviceName}
+          onSuccess={handleSuccess}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
+    </>
   );
 }

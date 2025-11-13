@@ -34,6 +34,21 @@ export interface ContactForm {
   message: string;
 }
 
+export interface ServiceRequest {
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  serviceId: string;
+  serviceName: string;
+  projectGoals: string;
+  mainFeatures: string;
+  timeline: string;
+  budget: string;
+  referralSource: string;
+  additionalInfo: string;
+}
+
 export interface NotionProject {
   id: string;
   created_time: string;

@@ -73,16 +73,14 @@ export function Services() {
                     serviceId={service.id}
                     serviceName={service.title}
                     variant={service.popular ? "accent" : "primary"}
-                  >
-                    Commander - {service.price}
-                  </CheckoutButton>
+                  />
                 ) : (
                   <Button
                     variant={service.popular ? "accent" : "primary"}
                     className="w-full"
                     onClick={() => handleContactClick(service.id)}
                   >
-                    Demander un devis
+                    Nous contacter
                   </Button>
                 )}
               </div>

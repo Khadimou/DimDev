@@ -65,9 +65,7 @@ export default function ServicesPage() {
                     serviceId={service.id}
                     serviceName={service.title}
                     variant={service.popular ? "accent" : "primary"}
-                  >
-                    Commander - {service.price}
-                  </CheckoutButton>
+                  />
                 ) : (
                   <Link href={`/contact?service=${service.id}`}>
                     <button
@@ -77,7 +75,7 @@ export default function ServicesPage() {
                           : "bg-primary text-white hover:bg-primary/90"
                       }`}
                     >
-                      Demander un devis
+                      Nous contacter
                     </button>
                   </Link>
                 )}
