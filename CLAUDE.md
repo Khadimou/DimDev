@@ -127,7 +127,7 @@ NEXT_PUBLIC_URL=https://dimdev.pro
 
 # Brevo Email (required for contact form)
 BREVO_API_KEY=your_brevo_api_key
-EMAIL_FROM=contact@dimdev.com
+EMAIL_FROM=contact@dimde.pro
 
 # Analytics (optional)
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX

@@ -49,7 +49,7 @@ git push -u origin main
 NOTION_API_KEY=secret_xxxxx
 NOTION_DATABASE_ID=xxxxx
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX (optionnel)
-EMAIL_FROM=contact@dimdev.com
+EMAIL_FROM=contact@dimde.pro
 ```
 
 #### Option B : Avec Vercel CLI

@@ -100,7 +100,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-dark mb-1">Email</h3>
-                  <p className="text-gray-600 text-sm">contact@dimdev.com</p>
+                  <p className="text-gray-600 text-sm">contact@dimde.pro</p>
                 </div>
               </div>
             </Card>
@@ -277,7 +277,7 @@ export default function ContactPage() {
                 )}
                 {status === "error" && (
                   <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
-                    ❌ Une erreur est survenue. Réessayez ou écrivez-moi directement à contact@dimdev.com
+                    ❌ Une erreur est survenue. Réessayez ou écrivez-moi directement à contact@dimde.pro
                   </div>
                 )}
 

@@ -62,7 +62,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxxxx
 #### Email (Brevo)
 ```env
 BREVO_API_KEY=your_brevo_api_key
-EMAIL_FROM=contact@dimdev.com
+EMAIL_FROM=contact@dimde.pro
 ```
 
 #### Analytics
@@ -299,7 +299,7 @@ MIT License - Libre d'utilisation
 ## 🤝 Support
 
 Pour toute question :
-- Email : contact@dimdev.com
+- Email : contact@dimde.pro
 - LinkedIn : [Votre profil]
 - GitHub : [Votre profil]
 
